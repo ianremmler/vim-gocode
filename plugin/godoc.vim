@@ -72,11 +72,11 @@ function! s:Godoc(...)
   if !len(word)
     let oldiskeyword = &iskeyword
     setlocal iskeyword+=.
-    let word = expand('<cword>')
+    let word = expand('<cfile>')
     let &iskeyword = oldiskeyword
   endif
   let word = substitute(word, '[^a-zA-Z0-9\\/._~-]', '', 'g')
-  let words = split(word, '\.')
+  let words = split(word, '\.\ze[^.\/]\+$')
   if !len(words)
     return
   endif
